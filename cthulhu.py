@@ -10,7 +10,7 @@ class Character:
         self.strength = strength
         self.intelligence = intelligence
         self.dexterity = dexterity
-        self.hp = 100  # ヒットポイント
+        self.hp = self.strength * 15  # ヒットポイント
         self.sanity = sanity  # 精神的健康度（Sanity）
         self.attack_power = self.strength * 2
 
@@ -74,6 +74,7 @@ class Character:
 class ElderGod(Character):
     def __init__(self):
         super().__init__(name="邪神", strength=50, intelligence=100, dexterity=20, sanity=200)
+        self.hp=150         #邪神くんのHP
 
     def attack(self, target):
         """邪神の攻撃（HPダメージとSanityダメージ）"""
@@ -107,6 +108,10 @@ class Mansion:
             "図書室": {"調査可能": ["本棚", "机", "窓"], "clue_found": False},
         }
         self.clue_count = 0  # 発見した手がかりの数
+        
+        # 各部屋ごとに手がかりの場所をランダムに決定
+        for room in self.rooms:
+            self.rooms[room]["clue_location"] = random.choice(self.rooms[room]["調査可能"])
 
     def explore_room(self, room, player):
         if room not in self.rooms:
@@ -133,10 +138,13 @@ class Mansion:
 
     def check_clue(self, room, action, player):
         """手がかりを調べる"""
+        # ランダムに調査可能項目を1つ選ぶ
+        action_to_check = random.choice(self.rooms[room]["調査可能"])
+        
         roll = random.randint(1, 100)
-        if roll <= player.intelligence * 10:  # 知力が高いほど成功しやすく
-            print(f"{player.name}は{action}を調べて手がかりを見つけました！")
-            print(red_dis + '手がかりは邪神の存在を示唆しています。' + end_dis)
+        if roll <= 100:  # 100%の確率で成功する例（必要に応じて確率を調整）
+            print(f"{player.name}は{action_to_check}を調べて手がかりを見つけました！")
+            print('手がかりは邪神の存在を示唆しています。')
             player.sanity_check()  # 邪神の片鱗に触れ、sanチェック
             if not self.rooms[room]["clue_found"]:
                 self.clue_count += 1
@@ -144,7 +152,7 @@ class Mansion:
             else:
                 print(f"{room}ではすでに手がかりを見つけています。")
         else:
-            print(f"{player.name}は{action}を調べたが、手がかりを見つけられなかった。")
+            print(f"{player.name}は{action_to_check}を調べたが、手がかりを見つけられなかった。")
 
     def all_clues_found(self):
         return self.clue_count >= 5  # 手がかりが5つ見つかったらクリア

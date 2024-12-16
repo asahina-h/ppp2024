@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>動物占い</title>
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<h1>動物占い</h1>
+	<form action="/fortune" method="get">
+		<select id="year" name="year" required>
+			<!-- 年リストを表示 -->
+			<th:block th:each="year : ${years}">
+				<option th:value="${year}" th:text="${year}"></option>
+			</th:block>
+		</select>
+		<label for="year">年</label>
+
+		<select name="month" required>
+			<!-- 月リストを表示 (1月〜12月) -->
+			<th:block th:each="month : ${months}">
+				<option th:value="${month}" th:text="${month}" th:selected="${month == selectedMonth}"></option>
+			</th:block>
+		</select>
+		<label for="month">月</label>
+
+		<select id="day" name="day" required>
+			<!-- 日付リストを表示 (1〜最大日数) -->
+			<th:block th:each="day : ${daysInMonth}">
+				<option th:value="${day}" th:text="${day}"></option>
+			</th:block>
+		</select>
+		<label for="day">日</label>
+
+		<button type="submit">占い結果を表示</button>
+	</form>
+</body>
+
+</html>

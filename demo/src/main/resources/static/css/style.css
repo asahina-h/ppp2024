@@ -1,0 +1,63 @@
+@charset "UTF-8";
+
+/* サイト全体にフォントを適用 */
+body {
+	font-family: "Hachi Maru Pop", Meiryo UI;
+	font-weight: 400;
+	font-style: normal;
+}
+
+ul,
+ol {
+	padding: 0;
+}
+
+ul li {
+	margin-left: 20px;
+	position: relative;
+	list-style-type: none !important;
+	/*ポチ消す*/
+	padding: 0.5em 0.5em 0.5em 0.5em;
+	margin-bottom: 5px;
+	line-height: 1.5;
+	background: #dbebf8;
+	vertical-align: middle;
+	color: #505050;
+	border-radius: 15px 0px 0px 15px;
+	/*左側の角丸く*/
+}
+
+ul li:before {
+	display: inline-block;
+	vertical-align: middle;
+	/*以下白丸つくる*/
+	content: '';
+	width: 1em;
+	height: 1em;
+	background: #fff;
+	border-radius: 50%;
+	margin-right: 8px;
+}
+
+p.line1 {
+	font-size:large;
+	font-weight:bold;
+	margin-top: 20px;
+	position: relative;
+	background: #dfefff;
+	box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.1);
+	border: dashed 2px white;
+	padding: 0.2em 0.5em;
+	color: #454545;
+}
+
+p.line1:after {
+	position: absolute;
+	content: '';
+	left: -7px;
+	top: -7px;
+	border-width: 0 0 15px 15px;
+	border-style: solid;
+	border-color: #fff #fff #a8d4ff;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
