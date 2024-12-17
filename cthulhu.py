@@ -10,7 +10,7 @@ class Character:
         self.strength = strength
         self.intelligence = intelligence
         self.dexterity = dexterity
-        self.hp = self.strength * 15  # ヒットポイント
+        self.hp = self.strength * 20  # ヒットポイント
         self.sanity = sanity  # 精神的健康度（Sanity）
         self.attack_power = self.strength * 2
 
